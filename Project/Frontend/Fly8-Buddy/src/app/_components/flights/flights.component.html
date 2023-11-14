@@ -1,0 +1,87 @@
+<div class="container my-5">
+    <form #flightSearchForm="ngForm" (ngSubmit)="onSubmit(flightSearchForm.value)">
+        <div class="form-group mb-3">
+          <label for="source" class="form-label">Source</label>
+            <select id="inputState" class="form-select" name="source" [(ngModel)]="flight.source" required>
+              <option selected>Choose...</option>
+              <option>New York</option>
+              <option>London</option>
+              <option>Paris</option>
+              <option>...</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="source" class="form-label">Destination</label>
+          <select id="inputState" class="form-select" name="destination" [(ngModel)]="flight.destination" required>
+            <option selected>Choose...</option>
+            <option>Madrid</option>
+            <option>London</option>
+            <option>Paris</option>
+            <option>Rome</option>
+            <option>...</option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="dateOfTravel">Date of Travel</label>
+          <input type="date" class="form-control" id="dateOfTravel" name="dateOfTravel" [(ngModel)]="flight.dateOfTravel" required [min]="currentDate">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="travelClass">Travel Class</label>
+          <select class="form-control" id="travelClass" name="travelClass" [(ngModel)]="flight.travelClass" required>
+            <option value="Economy">Economy</option>
+            <option value="Business">Business</option>
+            <option value="FirstClass">First Class</option>
+          </select>
+        </div>
+        <div class="row">
+            <label>Passengers</label>
+        <div class="form-group mb-3  col-md-4">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="me-3">Adults</label>
+                <button class="btn btn-outline-secondary" type="button" (click)="flight.numberOfAdults = flight.numberOfAdults ? flight.numberOfAdults + 1 : 1">+</button>
+              </div>
+              <input type="number" class="form-control text-center small-input" id="numberOfAdults" name="numberOfAdults" [(ngModel)]="flight.numberOfAdults" min="0">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="flight.numberOfAdults = flight.numberOfAdults && flight.numberOfAdults > 0 ? flight.numberOfAdults - 1 : 0">-</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-3 col-md-4">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="mx-3">Children</label>
+                <button class="btn btn-outline-secondary" type="button" (click)="flight.numberOfChildren = flight.numberOfChildren ? flight.numberOfChildren + 1 : 1">+</button>
+              </div>
+              <input type="number" class="form-control text-center small-input w-25" id="numberOfChildren" name="numberOfChildren" [(ngModel)]="flight.numberOfChildren" min="0">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="flight.numberOfChildren = flight.numberOfChildren && flight.numberOfChildren > 0 ? flight.numberOfChildren - 1 : 0">-</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-3 col-md-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label class="mx-3">Infants</label>
+                    <button class="btn btn-outline-secondary" type="button" (click)="flight.numberOfInfants = flight.numberOfInfants ? flight.numberOfInfants + 1 : 1">+</button>
+                </div>
+                <input type="number" class="form-control text-center small-input w-25" id="numberOfInfants" name="numberOfInfants" [(ngModel)]="flight.numberOfInfants" min="0">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="flight.numberOfInfants = flight.numberOfInfants && flight.numberOfInfants > 0 ? flight.numberOfInfants - 1 : 0">-</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Search Flights</button>
+      </form>
+
+      <app-flight-detail *ngIf="showFlightDetail" [flightDetails]="flight" (closeFlightDetails)="closeFlightDetails()"></app-flight-detail>
+
+
+
+</div>
